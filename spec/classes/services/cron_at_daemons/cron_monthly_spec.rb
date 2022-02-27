@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+require 'spec_helper'
+
+describe 'almalinux_hardening::services::cron_at_daemons::cron_monthly' do
+  on_supported_os.each do |os, os_facts|
+    context "on #{os}" do
+      let(:facts) { os_facts }
+
+      it { is_expected.to compile }
+    end
+  end
+end
