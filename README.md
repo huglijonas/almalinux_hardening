@@ -1,16 +1,17 @@
 # AlmaLinux Hardening
 
 ## Table of Contents
+
 1. [Description](#description)
-  * [Major Releases Supported](#major-releases-supported)
+    * [Major Releases Supported](#major-releases-supported)
 1. [Setup](#setup)
-  * [What is this module affecting?](#what-is-this-module-affecting?)
-  * [Setup Requirements](#setup-requirements)
-  * [Beginning with the module](#beginning-with-the-module)
+    * [What is this module affecting?](#what-is-this-module-affecting?)
+    * [Setup Requirements](#setup-requirements)
+    * [Beginning with the module](#beginning-with-the-module)
 1. [Usage](#usage)
-  * [Parameters](#parameters)
-    * [Level 1](#level-1)
-    * [Level 2](#level-2)
+    * [Parameters](#parameters)
+      * [Level 1](#level-1)
+      * [Level 2](#level-2)
 1. [Limitations](#limitations)
 1. [Development](#development)
 1. [Credits](#credits)
