@@ -119,3 +119,4 @@ almalinux_hardening::server_level_1:
 - system::network::ipv6::router_advertisements
 - system::network::wireless::software_configuration::deactivate
 - optional::home_permissions
+- optional::log_permissions

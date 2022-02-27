@@ -1,6 +1,6 @@
 {
   "name": "huglij-almalinux_hardening",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Jonas Hügli",
   "summary": "CIS OS Hardening for AlmaLinux 8 distribution",
   "license": "AGPL-3.0-or-later",
@@ -11,12 +11,6 @@
 
   ],
   "operatingsystem_support": [
-    {
-      "operatingsystem": "CentOS",
-      "operatingsystemrelease": [
-        "8"
-      ]
-    },
     {
       "operatingsystem": "AlmaLinux",
       "operatingsystemrelease": [
