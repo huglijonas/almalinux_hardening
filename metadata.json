@@ -5,6 +5,8 @@
   "summary": "CIS OS Hardening for AlmaLinux 8 distribution",
   "license": "AGPL-3.0-or-later",
   "source": "https://github.com/huglijonas/almalinux_hardening",
+  "project_page": "https://github.com/huglijonas/almalinux_hardening",
+  "issues_url": "https://github.com/huglijonas/almalinux_hardening/issues",
   "dependencies": [
 
   ],
