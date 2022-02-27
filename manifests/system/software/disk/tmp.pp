@@ -20,14 +20,14 @@ class almalinux_hardening::system::software::disk::tmp {
   if $almalinux_hardening::enable_disk_tmp {
     if ! $facts['mountpoints']['/tmp'] {
       notify { 'tmp_separate_notify_type1':
-        message   => '/tmp is not on a separate partition LV!',
-        loglevel  => 'warning',
+        message  => '/tmp is not on a separate partition LV!',
+        loglevel => 'warning',
       }
     }
     elsif $facts['mountpoints']['/tmp'] and $facts['mountpoints']['/tmp']['device'] !~ /^\/dev\/mapper\/.*tmp.*$/  {
       notify { 'tmp_separate_notify_type2':
-        message   => '/tmp seems to not be on a separate partition or LV!',
-        loglevel  => 'warning',
+        message  => '/tmp seems to not be on a separate partition or LV!',
+        loglevel => 'warning',
       }
     }
   }

@@ -17,7 +17,7 @@ class almalinux_hardening::system::network::firewalld::install {
   if $almalinux_hardening::enable_firewalld_install {
     package { 'firewalld':
       ensure          => latest,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
   }
 }

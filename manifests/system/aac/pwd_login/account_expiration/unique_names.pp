@@ -19,7 +19,7 @@ class almalinux_hardening::system::aac::pwd_login::account_expiration::unique_na
   if $almalinux_hardening::enable_pwdlogin_expiration_unique_names {
     package { 'util-linux-user':
       ensure          => latest,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
 
     exec { 'unique_names':

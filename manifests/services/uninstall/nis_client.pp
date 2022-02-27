@@ -22,7 +22,7 @@ class almalinux_hardening::services::uninstall::nis_client {
   if $almalinux_hardening::enable_uninstall_nis_client {
     package { 'ypbind':
       ensure          => purged,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
   }
 }

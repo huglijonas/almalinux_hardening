@@ -16,7 +16,7 @@ class almalinux_hardening::system::software::integrity::aide::install {
   if $almalinux_hardening::enable_integrity_aide_install {
     package { 'aide':
       ensure          => latest,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
   }
 }

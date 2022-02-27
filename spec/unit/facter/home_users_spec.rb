@@ -13,7 +13,7 @@ describe :home_users, type: :fact do
   end
 
   it 'returns a value' do
-    (fact.value).each do |home|
+    fact.value.each do |home|
       expect(home).to exist(home)
     end
   end

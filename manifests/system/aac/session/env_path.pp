@@ -39,8 +39,8 @@ class almalinux_hardening::system::aac::session::env_path {
 
     exec { 'root_env_path_integrity_exec':
       path    => '/usr/bin:/bin:/usr/sbin',
-      command => "wall \"Error in $facts['path']\"",
-      onlyif  => "echo $facts['path'] | grep -qE '(^:|::|:[a-zA-Z0-9]|\.|:$)'",
+      command => "wall \"Error in ${facts['path']}\"",
+      onlyif  => "echo ${facts['path']} | grep -qE '(^:|::|:[a-zA-Z0-9]|\.|:$)'",
     }
   }
 }

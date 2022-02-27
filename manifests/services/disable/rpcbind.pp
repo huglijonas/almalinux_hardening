@@ -34,7 +34,7 @@ class almalinux_hardening::services::disable::rpcbind {
 
     package { 'nfs-utils':
       ensure          => absent,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
   }
 }

@@ -25,7 +25,7 @@ class almalinux_hardening::optional::home_permissions {
   if $almalinux_hardening::enable_optional_home_permissions {
     $definitive_home_users = difference($facts['home_users'],$almalinux_hardening::ignore_home_users)
     $definitive_home_users.each | $home | {
-      file { "${home}":
+      file { $home:
         ensure       => directory,
         links        => follow,
         mode         => '0750',

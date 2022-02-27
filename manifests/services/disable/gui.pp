@@ -31,7 +31,7 @@ class almalinux_hardening::services::disable::gui {
   if $almalinux_hardening::enable_disable_gui {
     package { $almalinux_hardening::gui_packages:
       ensure          => absent,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
 
     exec { 'system_default_target':

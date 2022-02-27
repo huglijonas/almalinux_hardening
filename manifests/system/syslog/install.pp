@@ -19,7 +19,7 @@ class almalinux_hardening::system::syslog::install {
   if $almalinux_hardening::enable_syslog_install {
     package { 'rsyslog':
       ensure          => latest,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
   }
 }

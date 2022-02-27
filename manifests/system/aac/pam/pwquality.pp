@@ -63,7 +63,7 @@ class almalinux_hardening::system::aac::pam::pwquality {
   if $almalinux_hardening::enable_pam_pwquality {
     package { 'libpwquality':
       ensure          => latest,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
     -> File_line <| path == '/etc/security/pwquality.conf' |>
     file_line { 'pam minlen':

@@ -18,7 +18,7 @@ class almalinux_hardening::services::uninstall::xinetd {
   if $almalinux_hardening::enable_uninstall_xinetd {
     package { 'xinetd':
       ensure          => purged,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
   }
 }

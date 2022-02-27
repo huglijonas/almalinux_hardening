@@ -20,7 +20,7 @@ class almalinux_hardening::services::uninstall::ldap_client {
   if $almalinux_hardening::enable_uninstall_ldap_client {
     package { 'openldap-clients':
       ensure          => purged,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
   }
 }

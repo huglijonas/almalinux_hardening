@@ -9,7 +9,7 @@
 #   include almalinux_hardening::services::ssh::service
 class almalinux_hardening::services::ssh::service {
   service { 'sshd':
-    ensure  => running,
-    enable  => true,
+    ensure => running,
+    enable => true,
   }
 }

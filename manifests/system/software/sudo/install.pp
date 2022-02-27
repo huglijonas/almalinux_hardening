@@ -19,7 +19,7 @@ class almalinux_hardening::system::software::sudo::install {
   if $almalinux_hardening::enable_sudo_install {
     package { 'sudo':
       ensure          => latest,
-      install_options => ['--disablerepo',"${almalinux_hardening::disable_repos}",'--enablerepo',"${almalinux_hardening::enable_repos}"],
+      install_options => ['--disablerepo',$almalinux_hardening::disable_repos,'--enablerepo',$almalinux_hardening::enable_repos],
     }
   }
 }
