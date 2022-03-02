@@ -18,7 +18,7 @@ class almalinux_hardening::optional::log_permissions {
   if $almalinux_hardening::enable_optional_log_permissions {
     exec { 'log_permissions':
       path    => '/usr/bin:/bin:/usr/sbin',
-      command => 'find /var/log -type f -exec chmod g-wx,o-rwx "{}" + -o -type d -exec chmod g- w,o-rwx "{}" +',
+      command => 'find /var/log -type f -exec chmod g-wx,o-rwx "{}" + -o -type d -exec chmod g-w,o-rwx "{}" +',
       unless  => 'find /var/log -type f -perm /037 -ls -o -type d -perm /026 | wc -l | grep -q -E "^0$"',
     }
   }
