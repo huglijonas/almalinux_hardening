@@ -24,7 +24,7 @@ This Puppet module performs the hardening in accordance with the CIS (*Center fo
 It is based on [the official AlmaLinux *OpenScap Guide*](https://wiki.almalinux.org/documentation/openscap-guide.html#about-openscap).
 All the CIS rules have been tested with [*OpenScap*](https://www.open-scap.org/).
 
-A report is available [here](https://github.com/huglijonas/almalinux_hardening/blob/0.1.2/reports/level1_security_guide.html).
+A report is available [here](https://github.com/huglijonas/almalinux_hardening/blob/0.1.3/reports/level1_security_guide.html).
 
 __*WARNING: Do not attempt to implement any of the settings with this Puppet module without first testing them in a non-operational environment. The creators of this guidance assume no responsibility whatsoever for its use by other parties, and makes no guarantees, expressed or implied, about its quality, reliability, or any other characteristic.*__
 
@@ -35,7 +35,7 @@ For the moment, there is only one major release for AlmaLinux: 8.
 ## Setup
 
 ### What is this module affecting?
-This module affects a lot of parameters. The following list is not exhaustive, so it is recommanded to read [the full report](https://github.com/huglijonas/almalinux_hardening/blob/0.1.2/reports/level1_security_guide.html) before using the module:
+This module affects a lot of parameters. The following list is not exhaustive, so it is recommanded to read [the full report](https://github.com/huglijonas/almalinux_hardening/blob/0.1.3/reports/level1_security_guide.html) before using the module:
 * Kernel settings ;
 * Packages (installations, deletions...) ;
 * Services (settings, statuses...) ;
@@ -70,7 +70,7 @@ class { '::almalinux_hardening':
   $home_device            = '/dev/mapper/vg-home',
   $tmp_device             = '/dev/mapper/vg-tmp',
   $vartmp_device          = '/dev/mapper/vg-var-tmp',
-  $time_server            = ['time.google.com'],
+  $time_servers           = ['time.google.com'],
   $ignore_system_users    = [],
   $ignore_home_users      = [],
   $disable_repos          = '',
@@ -117,7 +117,7 @@ class { 'almalinux_hardening':
 | home_device | Path of the dedicated device for /home | String | /dev/mapper/vg-home |
 | tmp_device | Path of the dedicated device for /tmp | String | /dev/mapper/vg-tmp |
 | vartmp_device | Path of the dedicated device for /var/tmp | String | /dev/mapper/vg-var-tmp |
-| time_server | List of the used time server(s) | Array[String] | ['time.google.com'] |
+| time_servers | List of the used time server(s) | Array[String] | ['time.google.com'] |
 | ignore_system_users | List of users who will not be affected by the module | Array[String] | [] |
 | ignore_home_users | List of users homes who will not be affected by the module | Array[String] | [] |
 | disable_repos | Disable repositories for the `dnf` command | String | '' |
