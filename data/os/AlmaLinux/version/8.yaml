@@ -118,3 +118,5 @@ almalinux_hardening::server_level_1:
 - system::network::wireless::software_configuration::deactivate
 - optional::home_permissions
 - optional::log_permissions
+almalinux_hardening::server_custom_level:
+- custom::example

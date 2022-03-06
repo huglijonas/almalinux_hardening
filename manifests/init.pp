@@ -8,22 +8,23 @@
 # @example
 #   include almalinux_hardening
 class almalinux_hardening (
-  Enum['server']    $profile                                      = 'server',
-  Enum['1', '2']    $level                                        = '1',
-  Array[String]     $server_level_1                               = [],
-  Array[String]     $server_level_2                               = [],
-  Array[String]     $pam_services                                 = ['password-auth','system-auth'],
-  String            $root_account                                 = 'root',
-  String            $nologin_shell                                = '/sbin/nologin',
-  String            $home_device                                  = '/dev/mapper/vg-home',
-  String            $tmp_device                                   = '/dev/mapper/vg-tmp',
-  String            $vartmp_device                                = '/dev/mapper/vg-var-tmp',
-  Array[String]     $gui_packages                                 = ['xorg-x11-server-Xorg','xorg-x11-server-common','xorg-x11-server-utils','xorg-x11-server-Xwayland'],
-  Array[String]     $time_servers                                 = ['time.google.com'],
-  Array[String]     $ignore_system_users                          = [],
-  Array[String]     $ignore_home_users                            = [''],
-  String            $disable_repos                                = '',
-  String            $enable_repos                                 = '',
+  Enum['server']            $profile                              = 'server',
+  Enum['1', '2', 'custom']  $level                                = '1',
+  Array[String]             $server_level_1                       = [],
+  Array[String]             $server_level_2                       = [],
+  Array[String]             $server_custom_level                  = [],
+  Array[String]             $pam_services                         = ['password-auth','system-auth'],
+  String                    $root_account                         = 'root',
+  String                    $nologin_shell                        = '/sbin/nologin',
+  String                    $home_device                          = '/dev/mapper/vg-home',
+  String                    $tmp_device                           = '/dev/mapper/vg-tmp',
+  String                    $vartmp_device                        = '/dev/mapper/vg-var-tmp',
+  Array[String]             $gui_packages                         = ['xorg-x11-server-Xorg','xorg-x11-server-common','xorg-x11-server-utils','xorg-x11-server-Xwayland'],
+  Array[String]             $time_servers                         = ['time.google.com'],
+  Array[String]             $ignore_system_users                  = [],
+  Array[String]             $ignore_home_users                    = [''],
+  String                    $disable_repos                        = '',
+  String                    $enable_repos                         = '',
 
   Boolean           $enable_banner_issue                          = true,
   Array[String]     $banner_issue_files                           = ['/etc/issue','/etc/issue.net'],
@@ -188,8 +189,9 @@ class almalinux_hardening (
 
   $rules = $profile ? {
     'server' => $level ? {
-      '1' => $server_level_1,
-      '2' => $server_level_2,
+      '1'       => $server_level_1,
+      '2'       => $server_level_2,
+      'custom'  => $server_custom_level,
     }
   }
 

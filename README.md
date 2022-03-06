@@ -12,6 +12,7 @@
     * [Parameters](#parameters)
       * [Level 1](#level-1)
       * [Level 2](#level-2)
+      * [Custom Level](#custom-level)
 1. [Limitations](#limitations)
 1. [Development](#development)
 1. [Credits](#credits)
@@ -24,7 +25,7 @@ This Puppet module performs the hardening in accordance with the CIS (*Center fo
 It is based on [the official AlmaLinux *OpenScap Guide*](https://wiki.almalinux.org/documentation/openscap-guide.html#about-openscap).
 All the CIS rules have been tested with [*OpenScap*](https://www.open-scap.org/).
 
-A report is available [here](https://github.com/huglijonas/almalinux_hardening/blob/0.1.3/reports/level1_security_guide.html).
+A report is available [here](https://github.com/huglijonas/almalinux_hardening/blob/0.1.2/reports/level1_security_guide.html).
 
 __*WARNING: Do not attempt to implement any of the settings with this Puppet module without first testing them in a non-operational environment. The creators of this guidance assume no responsibility whatsoever for its use by other parties, and makes no guarantees, expressed or implied, about its quality, reliability, or any other characteristic.*__
 
@@ -35,7 +36,7 @@ For the moment, there is only one major release for AlmaLinux: 8.
 ## Setup
 
 ### What is this module affecting?
-This module affects a lot of parameters. The following list is not exhaustive, so it is recommanded to read [the full report](https://github.com/huglijonas/almalinux_hardening/blob/0.1.3/reports/level1_security_guide.html) before using the module:
+This module affects a lot of parameters. The following list is not exhaustive, so it is recommanded to read [the full report](https://github.com/huglijonas/almalinux_hardening/blob/0.1.2/reports/level1_security_guide.html) before using the module:
 * Kernel settings ;
 * Packages (installations, deletions...) ;
 * Services (settings, statuses...) ;
@@ -70,7 +71,7 @@ class { '::almalinux_hardening':
   $home_device            = '/dev/mapper/vg-home',
   $tmp_device             = '/dev/mapper/vg-tmp',
   $vartmp_device          = '/dev/mapper/vg-var-tmp',
-  $time_servers           = ['time.google.com'],
+  $time_server            = ['time.google.com'],
   $ignore_system_users    = [],
   $ignore_home_users      = [],
   $disable_repos          = '',
@@ -108,6 +109,8 @@ class { 'almalinux_hardening':
 ### Parameters
 
 #### Level 1
+To choose the level 1, the `$level` variable must be set to `1`.
+
 | Name | Description | Type | Default Value |
 |------|-------------|------|---------------|
 | profile | Type of machine | Enum['server'] | Server |
@@ -117,7 +120,7 @@ class { 'almalinux_hardening':
 | home_device | Path of the dedicated device for /home | String | /dev/mapper/vg-home |
 | tmp_device | Path of the dedicated device for /tmp | String | /dev/mapper/vg-tmp |
 | vartmp_device | Path of the dedicated device for /var/tmp | String | /dev/mapper/vg-var-tmp |
-| time_servers | List of the used time server(s) | Array[String] | ['time.google.com'] |
+| time_server | List of the used time server(s) | Array[String] | ['time.google.com'] |
 | ignore_system_users | List of users who will not be affected by the module | Array[String] | [] |
 | ignore_home_users | List of users homes who will not be affected by the module | Array[String] | [] |
 | disable_repos | Disable repositories for the `dnf` command | String | '' |
@@ -284,6 +287,26 @@ class { 'almalinux_hardening':
 
 #### Level 2
 __*NOT IMPLEMENTED YET*__
+
+
+#### Custom Level
+To choose the custom level, the `$level` variable must be set to `custom`.
+
+You can create your own rules with the dedicated script `custom-rule.sh` who is in the `scripts` directory. This script will create an entry in the `data/os/AlmaLinux/version/8.yaml` file, and it will create a `.pp` file in `manifests/custom` directory. When you want to execute the script, you only need to specify the name of your future custom rule like this:
+```bash
+# Example:
+# scripts/custom-rule.sh -n custom_kernel
+scripts/custom-rule.sh -n <rulename>
+```
+
+If you want to create a rule in a specific directory inside the `custom`, like `manifests/custom/kernel`, type this:
+```bash
+# Example:
+# scripts/custom-rule.sh -n kernel/custom
+scripts/custom-rule.sh -n <directory>/<rulename>
+```
+
+If you need help with the script, type `scripts/custom-rule.sh -h` or `scripts/custom-rule.sh --help`. If you want to add level 1 or 2 rules, you can edit the `data/os/AlmaLinux/version/8.yaml` to copy and paste rules you want.
 
 
 ## Limitations
