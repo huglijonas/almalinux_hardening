@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 * Ability to perform custom rules with a bash script.
 
 ### Bugfixes
-* None
+* Chrony restarting service when Puppet was executing.
 
 ### Known Issues
 * None

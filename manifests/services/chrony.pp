@@ -56,15 +56,17 @@ class almalinux_hardening::services::chrony {
       }
     }
     if $almalinux_hardening::enable_chrony_service {
+      exec { 'reload_chrony':
+        path        => '/usr/bin',
+        command     => 'systemctl restart chronyd',
+        refreshonly => true,
+      }
       file_line { 'chronyd_options':
         ensure => 'present',
         path   => '/etc/sysconfig/chronyd',
         line   => 'OPTIONS="-u chrony"',
         match  => '^(#|).*OPTIONS.*=.*',
-      }
-      ~> exec { 'reload_chrony':
-        path    => '/usr/bin',
-        command => 'systemctl restart chronyd',
+        notify => Exec['reload_chrony'],
       }
     }
   }
