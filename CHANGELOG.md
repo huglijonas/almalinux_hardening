@@ -1,17 +1,23 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## Hotfix 0.1.3
+* Fix `time_servers` variable in `manifests/init.pp` ;
+* Fix `chronyd` service declarations in `manifests/services/chrony` ;
+* Fix log permissions rule (command).
+
+
 ## Hotfix 0.1.2
-Fix dependencies
+* Fix dependencies
 
 
 ## Release 0.1.1
 
 ### Features
-None
+* None
 
 ### Bugfixes
-None
+* None
 
 ### Known Issues
 * Added the optional::log_permissions rule to `data/os/AlmaLinux/version/8.yaml` ;
@@ -25,7 +31,7 @@ None
 * Only the profile `level 1` is available.
 
 ### Bugfixes
-None known
+* None
 
 ### Known Issues
-None
+* None

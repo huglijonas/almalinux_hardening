@@ -19,9 +19,7 @@ almalinux_hardening::server_level_1:
 - services::uninstall::rsh
 - services::uninstall::telnet_client
 - services::uninstall::xinetd
-- services::chrony::install
-- services::chrony::service
-- services::chrony::time_server
+- services::chrony
 - services::cron_at_daemons::cron_hourly
 - services::cron_at_daemons::cron_monthly
 - services::cron_at_daemons::cron_weekly

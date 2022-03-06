@@ -19,7 +19,7 @@ class almalinux_hardening (
   String            $tmp_device                                   = '/dev/mapper/vg-tmp',
   String            $vartmp_device                                = '/dev/mapper/vg-var-tmp',
   Array[String]     $gui_packages                                 = ['xorg-x11-server-Xorg','xorg-x11-server-common','xorg-x11-server-utils','xorg-x11-server-Xwayland'],
-  Array[String]     $time_server                                  = ['time.google.com'],
+  Array[String]     $time_servers                                 = ['time.google.com'],
   Array[String]     $ignore_system_users                          = [],
   Array[String]     $ignore_home_users                            = [''],
   String            $disable_repos                                = '',
