@@ -118,5 +118,25 @@ almalinux_hardening::server_level_1:
 - system::network::wireless::software_configuration::deactivate
 - optional::home_permissions
 - optional::log_permissions
+almalinux_hardening::server_level_2:
+- system::auditd::install
+- system::auditd::service
+- system::auditd::priority
+- system::auditd::backlog
+- system::auditd::rules::delete
+- system::auditd::rules::immutable
+- system::auditd::rules::time
+- system::auditd::rules::usergroup
+- system::auditd::rules::logins
+- system::auditd::rules::actions
+- system::auditd::rules::access
+- system::auditd::rules::session
+- system::auditd::rules::export
+- system::auditd::rules::perm_mod
+- system::auditd::rules::modules
+- system::auditd::rules::net_env
+- system::auditd::rules::mac
+- system::auditd::data::log
+- system::auditd::data::space
 almalinux_hardening::server_custom_level:
 - custom::example
