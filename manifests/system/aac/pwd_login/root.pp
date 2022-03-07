@@ -5,7 +5,7 @@
 #   Restrict Root Logins
 #
 # @description - Verify Only Root Has UID 0
-#         If any account other than root has a UID of 0, this misconfiguration should be
+#   If any account other than root has a UID of 0, this misconfiguration should be
 #   investigated and the accounts other than root should be removed or have their
 #   UID changed.
 #   If the account is associated with system commands or applications the UID should
@@ -13,7 +13,7 @@
 #   greater than "1000" that has not already been assigned.
 #
 # @rationale - Verify Only Root Has UID 0
-#         An account has root authority if it has a UID of 0. Multiple accounts with a UID
+#   An account has root authority if it has a UID of 0. Multiple accounts with a UID
 #   of 0 afford more opportunity for potential intruders to guess a password for a
 #   privileged account. Proper configuration of sudo is recommended to afford multiple
 #   system administrators access to root privileges in an accountable manner.
@@ -31,7 +31,7 @@
 #   $ sudo usermod -s /sbin/nologin SYSACCT
 #
 # @rationale - Ensure that System Accounts Do Not Run a Shell Upon Login
-#         Ensuring shells are not given to system accounts upon login makes it more difficult for
+#   Ensuring shells are not given to system accounts upon login makes it more difficult for
 #   attackers to make use of system accounts.
 #
 # @description - Enforce usage of pam_wheel for su authentication

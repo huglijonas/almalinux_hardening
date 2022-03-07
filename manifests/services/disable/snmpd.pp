@@ -16,9 +16,8 @@
 #   include almalinux_hardening::services::disable::snmpd
 class almalinux_hardening::services::disable::snmpd {
   if $almalinux_hardening::enable_disable_snmpd {
-    service { 'disable_snmp':
+    service { 'snmpd':
       ensure => 'stopped',
-      name   => 'snmpd.service',
       enable => 'mask',
     }
   }

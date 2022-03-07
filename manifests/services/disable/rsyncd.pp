@@ -16,9 +16,8 @@
 #   include almalinux_hardening::services::disable::rsyncd
 class almalinux_hardening::services::disable::rsyncd {
   if $almalinux_hardening::enable_disable_rsyncd {
-    service { 'disable_rsyncd':
+    service { 'rsyncd':
       ensure => 'stopped',
-      name   => 'rsyncd.service',
       enable => 'mask',
     }
   }

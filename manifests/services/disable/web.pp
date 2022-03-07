@@ -16,9 +16,8 @@
 #   include almalinux_hardening::services::disable::web
 class almalinux_hardening::services::disable::web {
   if $almalinux_hardening::enable_disable_web {
-    service { 'disable_web':
+    service { 'httpd':
       ensure => 'stopped',
-      name   => 'httpd.service',
       enable => 'mask',
     }
   }
