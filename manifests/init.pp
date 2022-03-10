@@ -227,6 +227,13 @@ class almalinux_hardening (
   Boolean           $enable_auditd_install                        = true,
   Boolean           $enable_auditd_service                        = true,
   Boolean           $enable_auditd_priority                       = true,
+  Boolean           $enable_selinux_libselinux                    = true,
+  Boolean           $enable_selinux_mcstrans                      = true,
+  Boolean           $enable_selinux_setroubleshoot                = true,
+  Boolean           $enable_selinux_grub2                         = true,
+  Boolean           $enable_selinux_unconfined                    = true,
+  Boolean           $enable_selinux_policy                        = true,
+  Boolean           $enable_selinux_state                         = true,
   ) {
 
   $auditd_rules_file = $auditd_rules_program ? {
