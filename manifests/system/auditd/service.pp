@@ -24,8 +24,8 @@
 class almalinux_hardening::system::auditd::service {
   if $almalinux_hardening::enable_auditd_service {
     service { 'auditd':
-      ensure  => running,
-      enable  => true,
+      ensure => running,
+      enable => true,
     }
   }
 }

@@ -32,9 +32,9 @@ class almalinux_hardening::system::auditd::rules::perm_mod inherits almalinux_ha
     $almalinux_hardening::auditd_rules_perm_mod_actions.each | $action | {
       $almalinux_hardening::auditd_arch.each | $arch | {
         file_line { "perm_mod_${auditd_program}_${action}_${arch}":
-          ensure  => present,
-          path    => $almalinux_hardening::auditd_rules_file,
-          line    => "-a always,exit -F arch=b${arch} -S ${action} -F auid>=1000 -F auid!=unset -F key=perm_mod",
+          ensure => present,
+          path   => $almalinux_hardening::auditd_rules_file,
+          line   => "-a always,exit -F arch=b${arch} -S ${action} -F auid>=1000 -F auid!=unset -F key=perm_mod",
         } ~> Service['auditd']
       }
     }

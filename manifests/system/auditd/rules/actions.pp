@@ -27,9 +27,9 @@ class almalinux_hardening::system::auditd::rules::actions inherits almalinux_har
   if $almalinux_hardening::enable_auditd_rules_actions {
     $almalinux_hardening::auditd_rules_actions_paths.each | $path | {
       file_line { "actions_${auditd_program}_${path}":
-        ensure  => present,
-        path    => $almalinux_hardening::auditd_rules_file,
-        line    => "-w ${path} -p wa -k actions",
+        ensure => present,
+        path   => $almalinux_hardening::auditd_rules_file,
+        line   => "-w ${path} -p wa -k actions",
       } ~> Service['auditd']
     }
   }

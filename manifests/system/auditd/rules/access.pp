@@ -34,9 +34,9 @@ class almalinux_hardening::system::auditd::rules::access inherits almalinux_hard
       $almalinux_hardening::auditd_arch.each | $arch | {
         ['EACCES', 'EPERM'].each | $exit | {
           file_line { "access_${auditd_program}_${action}_${exit}_${arch}":
-            ensure  => present,
-            path    => $almalinux_hardening::auditd_rules_file,
-            line    => "-a always,exit -F arch=b${arch} -S ${action} -F exit=-${exit} -F auid>=1000 -F auid!=unset -F key=access",
+            ensure => present,
+            path   => $almalinux_hardening::auditd_rules_file,
+            line   => "-a always,exit -F arch=b${arch} -S ${action} -F exit=-${exit} -F auid>=1000 -F auid!=unset -F key=access",
           } ~> Service['auditd']
         }
       }

@@ -26,9 +26,9 @@ class almalinux_hardening::system::auditd::rules::usergroup inherits almalinux_h
   if $almalinux_hardening::enable_auditd_rules_usergroup {
     $almalinux_hardening::auditd_rules_usergroup_paths.each | $path | {
       file_line { "usergroup_${auditd_program}_${path}":
-        ensure  => present,
-        path    => $almalinux_hardening::auditd_rules_file,
-        line    => "-w ${path} -p wa -k audit_rules_usergroup_modification",
+        ensure => present,
+        path   => $almalinux_hardening::auditd_rules_file,
+        line   => "-w ${path} -p wa -k audit_rules_usergroup_modification",
       } ~> Service['auditd']
     }
   }

@@ -79,7 +79,7 @@ class almalinux_hardening::system::auditd::data::space inherits almalinux_harden
     file_line { 'data_auditd_mail':
       ensure => present,
       path   => '/etc/audit/auditd.conf',
-      line   => "action_mail_acct = root",
+      line   => 'action_mail_acct = root',
       match  => '^action_mail_acct\s=\s.*$',
     } ~> Service['auditd']
   }

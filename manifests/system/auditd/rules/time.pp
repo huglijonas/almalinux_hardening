@@ -91,25 +91,25 @@ class almalinux_hardening::system::auditd::rules::time inherits almalinux_harden
     $almalinux_hardening::auditd_rules_time_actions.each | $action | {
       $almalinux_hardening::auditd_arch.each | $arch | {
         file_line { "time_${auditd_program}_${action}_${arch}":
-          ensure  => present,
-          path    => $almalinux_hardening::auditd_rules_file,
-          line    => "-a always,exit -F arch=b${arch} -S ${action} -F key=audit_time_rules",
+          ensure => present,
+          path   => $almalinux_hardening::auditd_rules_file,
+          line   => "-a always,exit -F arch=b${arch} -S ${action} -F key=audit_time_rules",
         } ~> Service['auditd']
       }
     }
     $almalinux_hardening::auditd_rules_time_paths.each | $path | {
       file_line { "time_${auditd_program}_${path}":
-        ensure  => present,
-        path    => $almalinux_hardening::auditd_rules_file,
-        line    => "-w ${path} -p wa -k audit_time_rules",
+        ensure => present,
+        path   => $almalinux_hardening::auditd_rules_file,
+        line   => "-w ${path} -p wa -k audit_time_rules",
       } ~> Service['auditd']
     }
 
     $almalinux_hardening::auditd_arch.each | $arch | {
       file_line { "time_${$arch}_clock_settime":
-        ensure  => present,
-        path    => $almalinux_hardening::auditd_rules_file,
-        line    => "-a always,exit -F arch=b${arch} -S clock_settime -F a0=0x0 -F key=time-change",
+        ensure => present,
+        path   => $almalinux_hardening::auditd_rules_file,
+        line   => "-a always,exit -F arch=b${arch} -S clock_settime -F a0=0x0 -F key=time-change",
       } ~> Service['auditd']
     }
   }
