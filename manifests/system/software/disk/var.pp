@@ -2,13 +2,19 @@
 # Copyright (C) 2022  Jonas Hügli
 #
 # @summary
-#
+#   Ensure /var Located On Separate Partition
 #
 # @description
-#
+#   The /var directory is used by daemons and other system services to store
+#   frequently-changing data. Ensure that /var has its own partition or logical
+#   volume at installation time, or migrate it using LVM.
 #
 # @rationale
-#
+#   Ensuring that /var is mounted on its own partition enables the setting of
+#   more restrictive mount options. This helps protect system services such as
+#   daemons or other programs which use it. It is not uncommon for the /var
+#   directory to contain world-writable directories installed by other software
+#   packages.
 #
 # @example
 #   include almalinux_hardening::system::software::disk::var

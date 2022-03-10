@@ -2,13 +2,17 @@
 # Copyright (C) 2022  Jonas Hügli
 #
 # @summary
-#
+#   Disable SSH TCP Forwarding
 #
 # @description
-#
+#   The AllowTcpForwarding parameter specifies whether TCP forwarding is permitted.
+#   To disable TCP forwarding, add or correct the following line in
+#   /etc/ssh/sshd_config:
+#   AllowTcpForwarding no
 #
 # @rationale
-#
+#   Leaving port forwarding enabled can expose the organization to security risks
+#   and back-doors.
 #
 # @example
 #   include almalinux_hardening::services::ssh::tcp_forwarding

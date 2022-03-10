@@ -5,10 +5,19 @@
 #   Record Events that Modify the System's Mandatory Access Controls
 #
 # @description
-#
+#   If the auditd daemon is configured to use the augenrules program to read audit
+#   rules during daemon startup (the default), add the following line to a file
+#   with suffix .rules in the directory /etc/audit/rules.d:
+#   -w <path> -p wa -k MAC-policy
+#   If the auditd daemon is configured to use the auditctl utility to read audit
+#   rules during daemon startup, add the following line to /etc/audit/audit.rules
+#   file:
+#   -w <path> -p wa -k MAC-policy
 #
 # @rationale
-#
+#   The system's mandatory access policy (SELinux) should not be arbitrarily
+#   changed by anything other than administrator action. All changes to MAC policy
+#   should be audited.
 #
 # @example
 #   include almalinux_hardening::system::auditd::rules::mac

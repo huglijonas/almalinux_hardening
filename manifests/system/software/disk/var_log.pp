@@ -2,13 +2,15 @@
 # Copyright (C) 2022  Jonas Hügli
 #
 # @summary
-#
+#   Ensure /var/log Located On Separate Partition
 #
 # @description
-#
+#   System logs are stored in the /var/log directory. Ensure that it has its own
+#   partition or logical volume at installation time, or migrate it using LVM.
 #
 # @rationale
-#
+#   Placing /var/log in its own partition enables better separation between log
+#   files and other files in /var/.
 #
 # @example
 #   include almalinux_hardening::system::software::disk::var_log

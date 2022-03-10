@@ -2,13 +2,18 @@
 # Copyright (C) 2022  Jonas Hügli
 #
 # @summary
-#
+#   Ensure /var/log/audit Located On Separate Partition
 #
 # @description
-#
+#	  Audit logs are stored in the /var/log/audit directory. Ensure that it has
+#   its own partition or logical volume at installation time, or migrate it later
+#   using LVM. Make absolutely certain that it is large enough to store all audit
+#   logs that will be created by the auditing daemon.
 #
 # @rationale
-#
+#   Placing /var/log/audit in its own partition enables better separation between
+#   audit files and other files, and helps ensure that auditing cannot be halted
+#   due to the partition running out of space.
 #
 # @example
 #   include almalinux_hardening::system::software::disk::var_log_audit
