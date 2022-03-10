@@ -149,5 +149,10 @@ almalinux_hardening::server_level_2:
 - system::network::uncommon::rds
 - system::network::uncommon::sctp
 - system::network::uncommon::tipc
+- system::software::disk::home
+- system::software::disk::var
+- system::software::disk::var_log
+- system::software::disk::var_log_audit
+- system::software::disk::var_tmp
 almalinux_hardening::server_custom_level:
 - custom::example

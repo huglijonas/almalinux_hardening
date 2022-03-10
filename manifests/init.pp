@@ -238,6 +238,11 @@ class almalinux_hardening (
   Boolean           $enable_network_uncommon_rds                  = true,
   Boolean           $enable_network_uncommon_sctp                 = true,
   Boolean           $enable_network_uncommon_tipc                 = true,
+  Boolean           $enable_disk_home                             = true,
+  Boolean           $enable_disk_var                              = true,
+  Boolean           $enable_disk_varlog                           = true,
+  Boolean           $enable_disk_varlogaudit                      = true,
+  Boolean           $enable_disk_vartmp                           = true,
   ) {
 
   $auditd_rules_file = $auditd_rules_program ? {
