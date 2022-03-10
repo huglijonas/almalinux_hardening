@@ -25,7 +25,7 @@ This Puppet module performs the hardening in accordance with the CIS (*Center fo
 It is based on [the official AlmaLinux *OpenScap Guide*](https://wiki.almalinux.org/documentation/openscap-guide.html#about-openscap).
 All the CIS rules have been tested with [*OpenScap*](https://www.open-scap.org/).
 
-A report is available [here](https://github.com/huglijonas/almalinux_hardening/blob/0.2.0/reports/level1_security_guide.html).
+Reports are available [here](https://github.com/huglijonas/almalinux_hardening/blob/0.2.0/reports/).
 
 __*WARNING: Do not attempt to implement any of the settings with this Puppet module without first testing them in a non-operational environment. The creators of this guidance assume no responsibility whatsoever for its use by other parties, and makes no guarantees, expressed or implied, about its quality, reliability, or any other characteristic.*__
 
@@ -36,7 +36,7 @@ For the moment, there is only one major release for AlmaLinux: 8.
 ## Setup
 
 ### What is this module affecting?
-This module affects a lot of parameters. The following list is not exhaustive, so it is recommanded to read [the full report](https://github.com/huglijonas/almalinux_hardening/blob/0.2.0/reports/level1_security_guide.html) before using the module:
+This module affects a lot of parameters. The following list is not exhaustive, so it is recommanded to read both [full reports](https://github.com/huglijonas/almalinux_hardening/blob/0.2.0/reports/) before using the module:
 * Kernel settings ;
 * Packages (installations, deletions...) ;
 * Services (settings, statuses...) ;
@@ -44,6 +44,7 @@ This module affects a lot of parameters. The following list is not exhaustive, s
 * Files and directories (permissions, additions, deletions...) ;
 * Network settings (deactivations, activations, firewall settings...) ;
 * Bootloader settings ;
+* Auditing ;
 * And much more...
 
 
@@ -59,7 +60,7 @@ This module affects a lot of parameters. The following list is not exhaustive, s
 
 
 ### Beginning with the module
-Starting with this module is relatively easy, but it is really recommanded to read the full report before using the module.
+Starting with this module is relatively easy, but it is really recommanded to read the full reports before using the module.
 
 First, add this module. After adding it, you can use the class like the following code block.
 ```rb
@@ -71,7 +72,7 @@ class { '::almalinux_hardening':
   $home_device            = '/dev/mapper/vg-home',
   $tmp_device             = '/dev/mapper/vg-tmp',
   $vartmp_device          = '/dev/mapper/vg-var-tmp',
-  $time_server            = ['time.google.com'],
+  $time_servers           = ['time.google.com'],
   $ignore_system_users    = [],
   $ignore_home_users      = [],
   $disable_repos          = '',
@@ -92,7 +93,7 @@ class { 'almalinux_hardening':
   $home_device            = '/dev/mapper/vg-home',
   $tmp_device             = '/dev/mapper/vg-tmp',
   $vartmp_device          = '/dev/mapper/vg-var-tmp',
-  $time_server            = ['time.google.com'],
+  $time_servers           = ['time.google.com'],
   $ignore_system_users    = [],
   $ignore_home_users      = [],
   $disable_repos          = '',
@@ -113,18 +114,20 @@ To choose the level 1, the `$level` variable must be set to `1`.
 
 | Name | Description | Type | Default Value |
 |------|-------------|------|---------------|
-| profile | Type of machine | Enum['server'] | Server |
-| level | Hardening Level | Enum['1', '2'] | 1 |
-| root_account | Name of the root account | String | root |
-| nologin_shell | Path of the nologin shell | String | /sbin/nologin |
+| profile | Type of machine | Enum['server'] | 'server' |
+| level | Hardening Level | Enum['1', '2', 'custom'] | '1' |
+| root_account | Name of the root account | String | 'root' |
+| nologin_shell | Path of the nologin shell | String | '/sbin/nologin' |
 | home_device | Path of the dedicated device for /home | String | /dev/mapper/vg-home |
 | tmp_device | Path of the dedicated device for /tmp | String | /dev/mapper/vg-tmp |
 | vartmp_device | Path of the dedicated device for /var/tmp | String | /dev/mapper/vg-var-tmp |
-| time_server | List of the used time server(s) | Array[String] | ['time.google.com'] |
+| time_servers | List of the used time server(s) | Array[String] | ['time.google.com'] |
 | ignore_system_users | List of users who will not be affected by the module | Array[String] | [] |
 | ignore_home_users | List of users homes who will not be affected by the module | Array[String] | [] |
 | disable_repos | Disable repositories for the `dnf` command | String | '' |
 | enable_repos | Enable repositories for the `dnf` command | String | '' |
+| mountoptions_vartmp_partitioned | If the /var/tmp is partitioned or not | Boolean | true |
+| auditd_rules_program | Audit service program to use between `augenrules` or `auditctl` | Enum['augenrules','auditctl'] | 'augenrules' |
 | enable_banner_issue | See `manifests/system/aac/banners/login.pp` | Boolean | true |
 | banner_issue_files | Paths for issue and issue.net files | Array[String] | ['/etc/issue','/etc/issue.net'] |
 | enable_banner_motd | See `manifests/system/aac/banners/motd.pp` | Boolean | true |
@@ -286,7 +289,68 @@ To choose the level 1, the `$level` variable must be set to `1`.
 | enable_optional_log_permissions | See `manifests/optional/log_permissions.pp` | Boolean | true |
 
 #### Level 2
-__*NOT IMPLEMENTED YET*__
+To choose the level 2, the `$level` variable must be set to `2`. Level 1 rules are also in level 2.
+
+| Name | Description | Type | Default Value |
+|------|-------------|------|---------------|
+| enable_auditd_rules_perm_mod | See `manifests/system/auditd/rules/perm_mod.pp` | Boolean | true |
+| auditd_rules_perm_mod_actions | Actions to audit |  Array[String] | ['chmod', 'chown', 'fchmod', 'fchmodat', 'fchown', 'fchownat', 'fremovexattr', 'fsetxattr', 'lchown', 'lremovexattr', 'lsetxattr', 'removexattr', 'setxattr'] |
+| enable_auditd_rules_delete | See `manifests/system/auditd/rules/delete.pp` | Boolean | true |
+| auditd_rules_delete_actions | Actions to audit | Array[String] | ['rename', 'renameat', 'unlink', 'unlinkat'] |
+| enable_auditd_rules_access | See `manifests/system/auditd/rules/access.pp` | Boolean | true |
+| auditd_rules_access_actions | Actions to audit | Array[String] | ['creat', 'ftruncate', 'open', 'openat', 'truncate'] |
+| enable_auditd_rules_modules | See `manifests/system/auditd/rules/modules.pp` | Boolean | true |
+| auditd_rules_modules_actions | Actions to audit | Array[String] | ['delete_module', 'init_module'] |
+| enable_auditd_rules_logins | See `manifests/system/auditd/rules/logins.pp` | Boolean | true |
+| auditd_rules_logins_paths | Paths to audit | Array[String] | ['/var/run/faillock', '/var/log/lastlog'] |
+| enable_auditd_rules_time | See `manifests/system/auditd/rules/time.pp` | Boolean | true |
+| auditd_rules_time_actions | Actions to audit | Array[String] | ['adjtimex', 'clock_settime', 'stime'] |
+| auditd_rules_time_paths | Paths to audit | Array[String] | ['/etc/localtime'] |
+| enable_auditd_rules_mac | See `manifests/system/auditd/rules/mac.pp` | Boolean | true |
+| auditd_rules_mac_paths | Paths to audit | Array[String] | ['/etc/selinux/'] |
+| enable_auditd_rules_export | See `manifests/system/auditd/rules/export.pp` | Boolean | true |
+| auditd_rules_export_actions | Actions to audit | Array[String] | ['mount'],
+| enable_auditd_rules_net_env | See `manifests/system/auditd/rules/net_env.pp` | Boolean | true |
+| auditd_rules_net_env_actions | Actions to audit | Array[String] | ['sethostname,setdomainname'] |
+| auditd_rules_net_env_paths | Paths to audit | Array[String] | ['/etc/issue', '/etc/issue.net', '/etc/hosts', '/etc/sysconfig/network'] |
+| enable_auditd_rules_session | See `manifests/system/auditd/rules/session.pp` | Boolean | true |
+| auditd_rules_session_paths | Paths to audit | Array[String] | ['/var/run/utmp', '/var/log/btmp', '/var/log/wtmp'] |
+| enable_auditd_rules_actions | See `manifests/system/auditd/rules/actions.pp` | Boolean | true |
+| auditd_rules_actions_paths | Paths to audit | Array[String] | ['/etc/sudoers', '/etc/sudoers.d/'] |
+| enable_auditd_rules_usergroup | See `manifests/system/auditd/rules/usergroup.pp` | Boolean | true |
+| auditd_rules_usergroup_paths | Paths to audit | Array[String] | ['/etc/group', '/etc/gshadow', '/etc/security/opasswd', '/etc/passwd', '/etc/shadow'] |
+| enable_auditd_rules_immutable | See `manifests/system/auditd/rules/immutable.pp` | Boolean | true |
+| enable_auditd_data_log | See `manifests/system/auditd/data/log.pp` | Boolean | true |
+| auditd_data_log_maxsize | Max size of audit.log file | Integer | 6 |
+| auditd_data_log_maxsize_action | Action to perform when audit.log maxsize is reached | Enum['syslog', 'suspend', 'rotate', 'keep_logs'] | 'keep_logs' |
+| enable_auditd_data_space | See `manifests/system/auditd/data/space.pp` | Boolean | true |
+| auditd_data_space_adm_action | Administration action to perform when space disk is low | Enum['single', 'suspend', 'halt'] | 'halt' |
+| auditd_data_space_action | Action to perform when space disk is low | Enum['syslog', 'email', 'exec', 'suspend', 'single', 'halt'] | 'email' |
+| enable_auditd_backlog | See `manifests/system/auditd/backlog.pp` | Boolean | true |
+| auditd_backlog | Audit Limit Backlog | Integer | 8192 |
+| enable_auditd_install | See `manifests/system/auditd/install.pp` | Boolean | true |
+| enable_auditd_service | See `manifests/system/auditd/service.pp` | Boolean | true |
+| enable_auditd_priority | See `manifests/system/auditd/priority.pp` | Boolean | true |
+| enable_selinux_libselinux | See `manifests/system/selinux/libselinux.pp` | Boolean | true |
+| enable_selinux_mcstrans | See `manifests/system/selinux/mcstrans.pp` | Boolean | true |
+| enable_selinux_setroubleshoot | See manifests/system/selinux/setroubleshoot.pp/` | Boolean | true |
+| enable_selinux_grub2 | See `manifests/system/selinux/grub2.pp` | Boolean | true |
+| enable_selinux_unconfined | See `manifests/system/selinux/unconfined.pp` | Boolean | true |
+| enable_selinux_policy | See `manifests/system/selinux/policy.pp` | Boolean | true |
+| enable_selinux_state | See `manifests/system/selinux/state.pp` | Boolean | true |
+| enable_network_uncommon_dccp | See `manifests/system/network/uncommon/dccp.pp` | Boolean | true |
+| enable_network_uncommon_rds | See `manifests/system/network/uncommon/rds.pp` | Boolean | true |
+| enable_network_uncommon_sctp | See `manifests/system/network/uncommon/sctp.pp` | Boolean | true |
+| enable_network_uncommon_tipc | See `manifests/system/network/uncommon/tipc.pp` | Boolean | true |
+| enable_disk_home | See `manifests/system/software/disk/home.pp` | Boolean | true |
+| enable_disk_var | See `manifests/system/software/disk/var.pp` | Boolean | true |
+| enable_disk_varlog | See `manifests/system/software/disk/var_log.pp` | Boolean | true |
+| enable_disk_varlogaudit | See `manifests/system/software/disk/var_log_audit.pp` | Boolean | true |
+| enable_disk_vartmp | See `manifests/system/software/disk/var_tmp.pp` | Boolean | true |
+| enable_ssh_tcp_forwarding | See `manifests/services/ssh/tcp_forwarding.pp` | Boolean | true |
+| ssh_tcp_forwarding | Specifies whether TCP forwarding is permitted | Enum['no', 'yes'] | 'no' |
+| enable_ssh_x11_forwarding | See `manifests/services/ssh/x11_forwarding.pp` | Boolean | true |
+| ssh_x11_forwarding | Specifies whether X11 forwarding is permitted | Enum['no', 'yes'] | 'no' |
 
 
 #### Custom Level
