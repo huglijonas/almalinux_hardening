@@ -234,6 +234,10 @@ class almalinux_hardening (
   Boolean           $enable_selinux_unconfined                    = true,
   Boolean           $enable_selinux_policy                        = true,
   Boolean           $enable_selinux_state                         = true,
+  Boolean           $enable_network_uncommon_dccp                 = true,
+  Boolean           $enable_network_uncommon_rds                  = true,
+  Boolean           $enable_network_uncommon_sctp                 = true,
+  Boolean           $enable_network_uncommon_tipc                 = true,
   ) {
 
   $auditd_rules_file = $auditd_rules_program ? {

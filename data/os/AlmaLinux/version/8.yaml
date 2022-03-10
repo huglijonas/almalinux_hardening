@@ -145,5 +145,9 @@ almalinux_hardening::server_level_2:
 - system::selinux::unconfined
 - system::selinux::policy
 - system::selinux::state
+- system::network::uncommon::dccp
+- system::network::uncommon::rds
+- system::network::uncommon::sctp
+- system::network::uncommon::tipc
 almalinux_hardening::server_custom_level:
 - custom::example
