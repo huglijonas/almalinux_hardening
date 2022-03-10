@@ -26,9 +26,9 @@
 class almalinux_hardening::system::auditd::rules::immutable inherits almalinux_hardening::system::auditd::service {
   if $almalinux_hardening::enable_auditd_rules_immutable {
     file_line { 'auditd_immutable':
-      ensure  => present,
-      path    => $almalinux_hardening::auditd_rules_file,
-      line    => '-e 2',
+      ensure => present,
+      path   => $almalinux_hardening::auditd_rules_file,
+      line   => '-e 2',
     } ~> Service['auditd']
   }
 }

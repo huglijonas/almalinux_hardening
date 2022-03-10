@@ -29,9 +29,9 @@ class almalinux_hardening::system::auditd::rules::delete inherits almalinux_hard
     $almalinux_hardening::auditd_rules_delete_actions.each | $action | {
       $almalinux_hardening::auditd_arch.each | $arch | {
         file_line { "delete_${auditd_program}_${action}_${arch}":
-          ensure  => present,
-          path    => $almalinux_hardening::auditd_rules_file,
-          line    => "-a always,exit -F arch=b${arch} -S ${action} -F auid>=1000 -F auid!=unset -F key=delete",
+          ensure => present,
+          path   => $almalinux_hardening::auditd_rules_file,
+          line   => "-a always,exit -F arch=b${arch} -S ${action} -F auid>=1000 -F auid!=unset -F key=delete",
         } ~> Service['auditd']
       }
     }

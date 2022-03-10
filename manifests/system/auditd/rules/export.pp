@@ -30,9 +30,9 @@ class almalinux_hardening::system::auditd::rules::export inherits almalinux_hard
     $almalinux_hardening::auditd_rules_export_actions.each | $action | {
       $almalinux_hardening::auditd_arch.each | $arch | {
         file_line { "export_${auditd_program}_${action}_${arch}":
-          ensure  => present,
-          path    => $almalinux_hardening::auditd_rules_file,
-          line    => "-a always,exit -F arch=b${arch} -S ${action} -F auid>=1000 -F auid!=unset -F key=export",
+          ensure => present,
+          path   => $almalinux_hardening::auditd_rules_file,
+          line   => "-a always,exit -F arch=b${arch} -S ${action} -F auid>=1000 -F auid!=unset -F key=export",
         } ~> Service['auditd']
       }
     }

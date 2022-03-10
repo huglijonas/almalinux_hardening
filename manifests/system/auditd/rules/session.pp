@@ -31,9 +31,9 @@ class almalinux_hardening::system::auditd::rules::session inherits almalinux_har
   if $almalinux_hardening::enable_auditd_rules_session {
     $almalinux_hardening::auditd_rules_session_paths.each | $path | {
       file_line { "session_${auditd_program}_${path}":
-        ensure  => present,
-        path    => $almalinux_hardening::auditd_rules_file,
-        line    => "-w ${path} -p wa -k session",
+        ensure => present,
+        path   => $almalinux_hardening::auditd_rules_file,
+        line   => "-w ${path} -p wa -k session",
       } ~> Service['auditd']
     }
   }

@@ -44,14 +44,14 @@
 #   include almalinux_hardening::system::auditd::data::log
 class almalinux_hardening::system::auditd::data::log inherits almalinux_hardening::system::auditd::service {
   if $almalinux_hardening::enable_auditd_data_log {
-    file_line { "data_auditd_log_maxsize":
+    file_line { 'data_auditd_log_maxsize':
       ensure => present,
       path   => '/etc/audit/auditd.conf',
       line   => "max_log_file = ${almalinux_hardening::auditd_data_log_maxsize}",
       match  => '^max_log_file\s=\s.*$',
     } ~> Service['auditd']
 
-    file_line { "data_auditd_log_maxsize_action":
+    file_line { 'data_auditd_log_maxsize_action':
       ensure => present,
       path   => '/etc/audit/auditd.conf',
       line   => "max_log_file_action = ${almalinux_hardening::auditd_data_log_maxsize_action}",
