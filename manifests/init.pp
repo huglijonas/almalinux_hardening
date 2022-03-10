@@ -243,6 +243,10 @@ class almalinux_hardening (
   Boolean           $enable_disk_varlog                           = true,
   Boolean           $enable_disk_varlogaudit                      = true,
   Boolean           $enable_disk_vartmp                           = true,
+  Boolean           $enable_ssh_tcp_forwarding                    = true,
+  Enum['no', 'yes'] $ssh_tcp_forwarding                           = 'no',
+  Boolean           $enable_ssh_x11_forwarding                    = true,
+  Enum['no', 'yes'] $ssh_x11_forwarding                           = 'no',
   ) {
 
   $auditd_rules_file = $auditd_rules_program ? {

@@ -154,5 +154,7 @@ almalinux_hardening::server_level_2:
 - system::software::disk::var_log
 - system::software::disk::var_log_audit
 - system::software::disk::var_tmp
+- services::ssh::tcp_forwarding
+- services::ssh::x11_forwarding
 almalinux_hardening::server_custom_level:
 - custom::example
