@@ -17,9 +17,8 @@
 #   include almalinux_hardening::system::syslog::service
 class almalinux_hardening::system::syslog::service {
   if $almalinux_hardening::enable_syslog_service {
-    service { 'syslog_service':
+    service { 'rsyslog':
       ensure => running,
-      name   => 'rsyslog.service',
       enable => true,
     }
   }

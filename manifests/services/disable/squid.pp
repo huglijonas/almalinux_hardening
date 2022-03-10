@@ -16,9 +16,8 @@
 #   include almalinux_hardening::services::disable::squid
 class almalinux_hardening::services::disable::squid {
   if $almalinux_hardening::enable_disable_squid {
-    service { 'disable_squid':
+    service { 'squid':
       ensure => 'stopped',
-      name   => 'squid.service',
       enable => 'mask',
     }
   }

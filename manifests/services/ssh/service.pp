@@ -1,9 +1,14 @@
 # Puppet Module to perform AlmaLinux 8 OS Hardening with CIS benchmark.
 # Copyright (C) 2022  Jonas Hügli
 #
-# @summary A short summary of the purpose of this class
+# @summary
+#   None
 #
-# A description of what this class does
+# @description
+#   None
+#
+# @rationale
+#	  None
 #
 # @example
 #   include almalinux_hardening::services::ssh::service

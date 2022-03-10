@@ -16,9 +16,8 @@
 #   include almalinux_hardening::services::disable::samba
 class almalinux_hardening::services::disable::samba {
   if $almalinux_hardening::enable_disable_samba {
-    service { 'disable_samba':
+    service { 'smb':
       ensure => 'stopped',
-      name   => 'smb.service',
       enable => 'mask',
     }
   }

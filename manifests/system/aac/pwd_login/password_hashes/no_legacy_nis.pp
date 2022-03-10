@@ -1,7 +1,7 @@
 # Puppet Module to perform AlmaLinux 8 OS Hardening with CIS benchmark.
 # Copyright (C) 2022  Jonas Hügli
 #
-# @summary - 1
+# @summary
 #   Ensure there are no legacy + NIS entries
 #
 # @description
@@ -16,8 +16,6 @@
 #   include almalinux_hardening::system::aac::pwd_login::password_hashes::no_legacy_nis
 class almalinux_hardening::system::aac::pwd_login::password_hashes::no_legacy_nis {
   if $almalinux_hardening::enable_pwdlogin_no_legacy_nis_entry {
-    $paths=['/etc/group', '/etc/passwd', '/etc/shadow']
-
     $almalinux_hardening::pwdlogin_no_legacy_nis_entry_paths.each | $path | {
       exec { "nis_entry ${path}":
         path    => '/usr/bin:/bin:/usr/sbin',
