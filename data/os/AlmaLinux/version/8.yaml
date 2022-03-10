@@ -138,5 +138,12 @@ almalinux_hardening::server_level_2:
 - system::auditd::rules::mac
 - system::auditd::data::log
 - system::auditd::data::space
+- system::selinux::libselinux
+- system::selinux::mcstrans
+- system::selinux::setroubleshoot
+- system::selinux::grub2
+- system::selinux::unconfined
+- system::selinux::policy
+- system::selinux::state
 almalinux_hardening::server_custom_level:
 - custom::example
