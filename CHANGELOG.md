@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## Hotfix 1.0.3
+* Upgrade to PDK 3.2.0
+* Allow stdlib 3.4.1
+
+---
+
 ## Hotfix 1.0.1
 * Errors in modules dependencies corrected ;
 * Release 1.0.0 missing in changelog.

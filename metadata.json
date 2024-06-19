@@ -1,6 +1,6 @@
 {
   "name": "huglij-almalinux_hardening",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "author": "Jonas Hügli",
   "summary": "CIS OS Hardening for AlmaLinux 8 distribution",
   "license": "AGPL-3.0-or-later",
@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.25.0 <= 9.4.1"
+      "version_requirement": ">= 4.25.0 < 9.5.0"
     },
     {
       "name": "puppet/cron",
